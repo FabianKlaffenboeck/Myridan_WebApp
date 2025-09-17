@@ -207,7 +207,7 @@ export function CreateEditPart({open, part, cb}: {
                         <SearchableSelect
                             placeholder={"Tray"}
                             elements={shelfs.map(it => {
-                                return it.trays.map(({id, name}) => ({id: id!, label: name}))
+                                return it.trays.map(({id, name}) => ({id: id!, label: it.name + "-" + name}))
                             }).flat()}
                             value={tray_id}
                             setValue={setTray_id}

@@ -26,7 +26,7 @@ export function LoginForm({loginHandler,switchToRegister}: {
                             <div className="flex flex-col items-center text-center">
                                 <h1 className="text-2xl font-bold">Welcome back</h1>
                                 <p className="text-muted-foreground text-balance">
-                                    Login to your eWolveLabs account
+                                    Login to your DynaHowl account
                                 </p>
                             </div>
                             <div className="grid gap-3">
@@ -104,11 +104,11 @@ export function LoginForm({loginHandler,switchToRegister}: {
                         </div>
                     </form>
                     <div className="bg-muted relative hidden md:block">
-                        {/*<img*/}
-                        {/*    src="/placeholder.svg"*/}
-                        {/*    alt="Image"*/}
-                        {/*    className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"*/}
-                        {/*/>*/}
+                        <img
+                            src="/abstractArtwork.jpg"
+                            alt="Image"
+                            className="absolute inset-0 h-full w-full object-cover"
+                        />
                     </div>
                 </CardContent>
             </Card>
