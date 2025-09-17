@@ -1,4 +1,4 @@
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/button.tsx";
 import {Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import {DialogDescription} from "@radix-ui/react-dialog";
 import type {Part} from "@/Models/Part.ts";

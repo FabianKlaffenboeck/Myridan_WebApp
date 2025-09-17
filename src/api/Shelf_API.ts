@@ -11,6 +11,7 @@ export async function getShelfs(): Promise<Shelf[]> {
     }
     return await response.json();
 }
+
 export async function updateShelf(shelf: Shelf): Promise<Shelf> {
     const response = await fetch(API_ENDPOINT + '/shelfs', {
         method: 'POST',

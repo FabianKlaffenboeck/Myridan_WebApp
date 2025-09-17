@@ -1,5 +1,5 @@
-import {Button} from "@/components/ui/button";
-import {Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle} from "@/components/ui/sheet";
+import {Button} from "@/components/ui/button.tsx";
+import {Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle} from "@/components/ui/sheet.tsx";
 import {useEffect, useState} from "react";
 import {Input} from "@/components/ui/input.tsx";
 import {Label} from "@/components/ui/label.tsx";

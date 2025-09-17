@@ -1,9 +1,9 @@
 import {PartTable} from "@/pages/Tables/part-table.tsx";
 import {useEffect, useState} from "react";
-import {StockDrawer} from "@/pages/Dialogs/StockDrawer.tsx";
+import {StockDrawer} from "@/components/StockDrawer.tsx";
 import {toast} from "sonner";
-import {DeleteConfirm} from "@/pages/Dialogs/DeleteConfirm.tsx";
-import {CreateEditPart} from "@/pages/Dialogs/CreateEditPart.tsx";
+import {DeleteConfirm} from "@/components/DeleteConfirm.tsx";
+import {CreateEditPart} from "@/components/CreateEditPart.tsx";
 import type {Part} from "@/Models/Part.ts";
 import {deletePart, getParts, updatePart} from "@/api/Part_API.ts";
 
