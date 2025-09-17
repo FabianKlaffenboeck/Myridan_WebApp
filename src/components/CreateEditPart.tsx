@@ -1,5 +1,5 @@
-import {Button} from "@/components/ui/button";
-import {Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle} from "@/components/ui/sheet";
+import {Button} from "@/components/ui/button.tsx";
+import {Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle} from "@/components/ui/sheet.tsx";
 import type {Footprint} from "@/Models/Footprint.ts";
 import type {Manufacturer} from "@/Models/Manufacturer.ts";
 import type {PartType} from "@/Models/PartType.ts";
@@ -12,9 +12,11 @@ import type {ElectricalUnit} from "@/Models/ElectricalUnit.ts";
 import {getFootprints} from "@/api/Footprint_API.ts";
 import {getElectricalUnits} from "@/api/ElectricalUnit_API.ts";
 import {getManufacturers} from "@/api/Manufacturer_API.ts";
-import {getPartTypes} from "@/api/PartType_API";
+import {getPartTypes} from "@/api/PartType_API.ts";
 import {getShelfs} from "@/api/Shelf_API.ts";
 import {useEffect, useState} from "react";
+import type {Tray} from "@/Models/Tray.ts";
+import {getEmptyTrays} from "@/api/Tray_API.ts";
 
 export function CreateEditPart({open, part, cb}: {
     open: boolean
@@ -26,6 +28,7 @@ export function CreateEditPart({open, part, cb}: {
     const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
     const [partTypes, setPartTypes] = useState<PartType[]>([]);
     const [shelfs, setShelfs] = useState<Shelf[]>([]);
+    const [trays, setTrays] = useState<Tray[]>([]);
     const [electricalUnits, setElectricalUnits] = useState<ElectricalUnit[]>([]);
 
 
@@ -48,7 +51,7 @@ export function CreateEditPart({open, part, cb}: {
             footprint: footprints.find(it => it.id == footprint_id) || null,
             partType: partTypes.find(it => it.id == partType_id)!,
             manufacturer: manufacturers.find(it => it.id == manufacturer_id)!,
-            tray: shelfs.map(it => it.trays).flat().find(it => it.id == tray_id)!,
+            tray: trays.find(it => it.id == tray_id)!,
         };
     }
 
@@ -112,6 +115,12 @@ export function CreateEditPart({open, part, cb}: {
             .catch((error) => console.error('Error:', error));
     }, []);
 
+    useEffect(() => {
+        getEmptyTrays()
+            .then((data) => setTrays(data))
+            .catch((error) => console.error('Error:', error));
+    }, []);
+
 
     return (
         <Sheet open={open}>
@@ -124,45 +133,39 @@ export function CreateEditPart({open, part, cb}: {
 
                     {/*name: string*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-name">Name</Label>
+                        <Label>Name</Label>
                         <Input
                             value={name}
                             onChange={e => setName(e.target.value)}
-                            id="sheet-demo-name"
                         />
                     </div>
 
                     {/*quantity: number*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-name">Quantity</Label>
+                        <Label>Quantity</Label>
                         <Input
                             type="number"
                             value={quantity}
                             onChange={e => setQuantity(Number(e.target.value))}
-                            id="sheet-demo-name"
                         />
                     </div>
 
                     {/*value: number | null*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-name">Value</Label>
+                        <Label>Value</Label>
                         <Input
                             type="number"
                             value={value}
                             onChange={e => setValue(Number(e.target.value))}
-                            id="sheet-demo-name"
                         />
                     </div>
 
                     {/*electricalUnit: ElectricalUnit | null*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-username">ElectricalUnit</Label>
+                        <Label>ElectricalUnit</Label>
                         <SearchableSelect
                             placeholder={"ElectricalUnit"}
-                            elements={electricalUnits.map((it, index) => ({
-                                id: index,
-                                label: it.toString(),
-                            }))}
+                            elements={electricalUnits.map((it, index) => ({id: index, label: it.toString()}))}
                             value={electricalUnit_id}
                             setValue={setElectricalUnit_id}
                         ></SearchableSelect>
@@ -170,7 +173,7 @@ export function CreateEditPart({open, part, cb}: {
 
                     {/*footprint: Footprint | null*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-username">Footprint</Label>
+                        <Label>Footprint</Label>
                         <SearchableSelect
                             placeholder={"Footprint"}
                             elements={footprints.map(({id, metric}) => ({id: id!, label: metric}))}
@@ -181,7 +184,7 @@ export function CreateEditPart({open, part, cb}: {
 
                     {/*partType: PartType*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-username">PartType</Label>
+                        <Label>PartType</Label>
                         <SearchableSelect
                             placeholder={"PartType"}
                             elements={partTypes.map(({id, name}) => ({id: id!, label: name}))}
@@ -192,7 +195,7 @@ export function CreateEditPart({open, part, cb}: {
 
                     {/*manufacturer: Manufacturer*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-username">Manufacturer</Label>
+                        <Label>Manufacturer</Label>
                         <SearchableSelect
                             placeholder={"Manufacturer"}
                             elements={manufacturers.map(({id, name}) => ({id: id!, label: name}))}
@@ -203,12 +206,13 @@ export function CreateEditPart({open, part, cb}: {
 
                     {/*tray: Tray*/}
                     <div className="grid gap-3">
-                        <Label htmlFor="sheet-demo-username">Tray</Label>
+                        <Label>Tray</Label>
                         <SearchableSelect
                             placeholder={"Tray"}
-                            elements={shelfs.map(it => {
-                                return it.trays.map(({id, name}) => ({id: id!, label: name}))
-                            }).flat()}
+                            elements={trays.map(({id, name}) => ({
+                                id: id!,
+                                label: shelfs.find(shelf => shelf.trays.find(tray => tray.id == id))?.name + "-" + name
+                            }))}
                             value={tray_id}
                             setValue={setTray_id}
                         ></SearchableSelect>

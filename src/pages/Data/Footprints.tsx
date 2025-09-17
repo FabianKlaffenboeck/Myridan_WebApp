@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {FootprintsTable} from "@/pages/Tables/footprint-table.tsx";
 import type {Footprint} from "@/Models/Footprint.ts";
-import {CreateEditFootprint} from "@/pages/Dialogs/CreateEditFootprint.tsx";
+import {CreateEditFootprint} from "@/components/CreateEditFootprint.tsx";
 import {getFootprints, updateFootprint} from "@/api/Footprint_API.ts";
 import {toast} from "sonner";
 

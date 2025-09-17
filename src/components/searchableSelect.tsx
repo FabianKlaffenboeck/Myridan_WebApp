@@ -43,12 +43,12 @@ export function SearchableSelect({placeholder, elements, value, setValue}: {
                     <CommandList>
                         <CommandEmpty>{"No " + placeholder + " found."}</CommandEmpty>
                         <CommandGroup>
-                            {elements.filter(f => f.label.toLowerCase().includes(inputValue.toLowerCase())).map((element) => (
+                            {elements.sort((a,b) => a.label.localeCompare(b.label)).map((element) => (
                                 <CommandItem
                                     key={element.id}
-                                    value={element.id.toString()}
-                                    onSelect={(currentValue) => {
-                                        setValue(currentValue === value?.toString() ? undefined : Number(currentValue))
+                                    value={element.label}
+                                    onSelect={() => {
+                                        setValue(element.id)
                                         setOpen(false)
                                     }}>
                                     <CheckIcon

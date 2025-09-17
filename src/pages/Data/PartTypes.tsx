@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {PartTypesTable} from "@/pages/Tables/partTypes-table.tsx";
 import type {PartType} from "@/Models/PartType.ts";
-import {CreateEditPartType} from "@/pages/Dialogs/CreateEditPartType.tsx";
+import {CreateEditPartType} from "@/components/CreateEditPartType.tsx";
 import {getPartTypes, updatePartType} from "@/api/PartType_API.ts";
 import {toast} from "sonner";
 

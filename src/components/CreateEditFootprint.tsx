@@ -1,4 +1,4 @@
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/button.tsx";
 import {
     Sheet,
     SheetClose,
@@ -6,7 +6,7 @@ import {
     SheetFooter,
     SheetHeader,
     SheetTitle
-} from "@/components/ui/sheet";
+} from "@/components/ui/sheet.tsx";
 import {useEffect, useState} from "react";
 import type {Footprint} from "@/Models/Footprint.ts";
 import {Input} from "@/components/ui/input.tsx";

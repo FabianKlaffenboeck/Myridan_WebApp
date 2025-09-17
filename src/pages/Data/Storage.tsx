@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {StorageTable} from "../Tables/storage-table";
 import type {Shelf} from "@/Models/Shelf.ts";
 import {getShelfs, updateShelf} from "@/api/Shelf_API.ts";
-import {CreateEditStorage} from "@/pages/Dialogs/CreateEditStorage.tsx";
+import {CreateEditStorage} from "@/components/CreateEditStorage.tsx";
 import {toast} from "sonner";
 
 export default function Storage() {

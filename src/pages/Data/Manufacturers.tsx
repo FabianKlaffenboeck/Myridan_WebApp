@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {ManufacturersTable} from "@/pages/Tables/manufacturer-table.tsx";
 import type {Manufacturer} from "@/Models/Manufacturer.ts";
-import {CreateEditManufacturer} from "@/pages/Dialogs/CreateEditManufacturer.tsx";
+import {CreateEditManufacturer} from "@/components/CreateEditManufacturer.tsx";
 import {getManufacturers} from "@/api/Manufacturer_API.ts";
 import {updatePartType} from "@/api/PartType_API.ts";
 import {toast} from "sonner";
