@@ -10,4 +10,4 @@ run-image:
   only:
     - tags
   trigger:
-    project: sandbox/dockercompose/partmanager
+    project: sandbox/dockercompose/myridan
